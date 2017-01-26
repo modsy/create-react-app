@@ -152,7 +152,7 @@ function build(previousSizeMap) {
       process.exit(1);
     }
 
-    if (process.env.CI && stats.compilation.warnings.length) {
+    if (process.env.FAIL_ON_LINT && stats.compilation.warnings.length) {
      printErrors('Failed to compile.', stats.compilation.warnings);
      process.exit(1);
    }
