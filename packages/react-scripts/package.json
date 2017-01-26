@@ -1,6 +1,6 @@
 {
   "name": "@modsy/react-modsy-scripts",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Configuration and scripts for Create React App.",
   "repository": "modsy/create-react-app#modsy-scripts",
   "license": "BSD-3-Clause",
