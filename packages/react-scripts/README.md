@@ -1,4 +1,4 @@
-# react-scripts-ts-sass
+# react-modsy-scripts
 
 This package is a fork from the vanilla `react-scripts`, in order to add custom support for [Typescript](https://www.typescriptlang.org/) and [Sass](http://sass-lang.com/).
 
