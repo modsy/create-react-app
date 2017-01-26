@@ -8,6 +8,12 @@ Please refer to its documentation:
 * [Getting Started](https://github.com/facebookincubator/create-react-app/blob/master/README.md#getting-started) – How to create a new app.
 * [User Guide](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md) – How to develop apps bootstrapped with Create React App.
 
+## Install
+
+1. `npm install -g create-react-app`
+2. `create-react-app my-project-name --scripts-version=@modsy/react-modsy-scripts`
+3. `cd my-project-name`
+
 ## Support
 
 * [x] JS/ES6
