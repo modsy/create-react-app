@@ -29,6 +29,20 @@ function resolveAppIndex() {
   }
 }
 
+function resolveSetupTests() {
+  var jsIndex = resolveApp('src/setupTests.js');
+  var tsIndex = resolveApp('src/setupTests.ts');
+  var tsxIndex = resolveApp('src/setupTests.tsx');
+
+  if (fs.existsSync(tsxIndex)) {
+    return tsxIndex;
+  } else if (fs.existsSync(tsIndex)) {
+    return tsIndex;
+  } else {
+    return jsIndex;
+  }
+}
+
 // We support resolving modules according to `NODE_PATH`.
 // This lets you use absolute paths in imports inside large monorepos:
 // https://github.com/facebookincubator/create-react-app/issues/253.
@@ -59,7 +73,7 @@ module.exports = {
   appPackageJson: resolveApp('package.json'),
   appSrc: resolveApp('src'),
   yarnLockFile: resolveApp('yarn.lock'),
-  testsSetup: resolveApp('src/setupTests.js'),
+  testsSetup: resolveSetupTests(),
   appNodeModules: resolveApp('node_modules'),
   ownNodeModules: resolveApp('node_modules'),
   nodePaths: nodePaths,
@@ -81,6 +95,20 @@ function resolveOwnAppIndex() {
   }
 }
 
+function resolveOwnSetupTests() {
+  var jsIndex = resolveOwn('../template/src/setupTests.js');
+  var tsIndex = resolveOwn('../template/src/setupTests.ts');
+  var tsxIndex = resolveOwn('../template/src/setupTests.tsx');
+
+  if (fs.existsSync(tsxIndex)) {
+    return tsxIndex;
+  } else if (fs.existsSync(tsIndex)) {
+    return tsIndex;
+  } else {
+    return jsIndex;
+  }
+}
+
 // config before eject: we're in ./node_modules/react-scripts/config/
 module.exports = {
   appBuild: resolveApp('build'),
@@ -90,7 +118,7 @@ module.exports = {
   appPackageJson: resolveApp('package.json'),
   appSrc: resolveApp('src'),
   yarnLockFile: resolveApp('yarn.lock'),
-  testsSetup: resolveApp('src/setupTests.js'),
+  testsSetup: resolveSetupTests(),
   appNodeModules: resolveApp('node_modules'),
   // this is empty with npm3 but node resolution searches higher anyway:
   ownNodeModules: resolveOwn('../node_modules'),
@@ -108,7 +136,7 @@ if (__dirname.indexOf(path.join('packages', 'react-scripts', 'config')) !== -1) 
     appPackageJson: resolveOwn('../package.json'),
     appSrc: resolveOwn('../template/src'),
     yarnLockFile: resolveOwn('../template/yarn.lock'),
-    testsSetup: resolveOwn('../template/src/setupTests.js'),
+    testsSetup: resolveOwnSetupTests(),
     appNodeModules: resolveOwn('../node_modules'),
     ownNodeModules: resolveOwn('../node_modules'),
     nodePaths: nodePaths,
