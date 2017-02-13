@@ -20,6 +20,30 @@ function resolveApp(relativePath) {
   return path.resolve(appDirectory, relativePath);
 }
 
+function resolveAppIndex() {
+  var jsIndex = resolveApp('src/index.js');
+
+  if (fs.existsSync(jsIndex)) {
+    return jsIndex;
+  } else {
+    return resolveApp('src/index.tsx');
+  }
+}
+
+function resolveSetupTests() {
+  var jsIndex = resolveApp('src/setupTests.js');
+  var tsIndex = resolveApp('src/setupTests.ts');
+  var tsxIndex = resolveApp('src/setupTests.tsx');
+
+  if (fs.existsSync(tsxIndex)) {
+    return tsxIndex;
+  } else if (fs.existsSync(tsIndex)) {
+    return tsIndex;
+  } else {
+    return jsIndex;
+  }
+}
+
 // We support resolving modules according to `NODE_PATH`.
 // This lets you use absolute paths in imports inside large monorepos:
 // https://github.com/facebookincubator/create-react-app/issues/253.
@@ -77,16 +101,17 @@ module.exports = {
   appBuild: resolveApp('build'),
   appPublic: resolveApp('public'),
   appHtml: resolveApp('public/index.html'),
-  appIndexJs: resolveApp('src/index.js'),
+  appIndexJs: resolveAppIndex(),
   appPackageJson: resolveApp('package.json'),
   appSrc: resolveApp('src'),
   yarnLockFile: resolveApp('yarn.lock'),
-  testsSetup: resolveApp('src/setupTests.js'),
+  testsSetup: resolveSetupTests(),
   appNodeModules: resolveApp('node_modules'),
   ownNodeModules: resolveApp('node_modules'),
   nodePaths: nodePaths,
   publicUrl: getPublicUrl(resolveApp('package.json')),
-  servedPath: getServedPath(resolveApp('package.json'))
+  servedPath: getServedPath(resolveApp('package.json')),
+  appTsconfigJson: resolveApp('tsconfig.json')
 };
 
 // @remove-on-eject-begin
@@ -94,22 +119,47 @@ function resolveOwn(relativePath) {
   return path.resolve(__dirname, relativePath);
 }
 
+function resolveOwnAppIndex() {
+  var jsIndex = resolveOwn('../template/src/index.js');
+
+  if (fs.existsSync(jsIndex)) {
+    return jsIndex;
+  } else {
+    return resolveOwn('../template/src/index.tsx');
+  }
+}
+
+function resolveOwnSetupTests() {
+  var jsIndex = resolveOwn('../template/src/setupTests.js');
+  var tsIndex = resolveOwn('../template/src/setupTests.ts');
+  var tsxIndex = resolveOwn('../template/src/setupTests.tsx');
+
+  if (fs.existsSync(tsxIndex)) {
+    return tsxIndex;
+  } else if (fs.existsSync(tsIndex)) {
+    return tsIndex;
+  } else {
+    return jsIndex;
+  }
+}
+
 // config before eject: we're in ./node_modules/react-scripts/config/
 module.exports = {
   appBuild: resolveApp('build'),
   appPublic: resolveApp('public'),
   appHtml: resolveApp('public/index.html'),
-  appIndexJs: resolveApp('src/index.js'),
+  appIndexJs: resolveAppIndex(),
   appPackageJson: resolveApp('package.json'),
   appSrc: resolveApp('src'),
   yarnLockFile: resolveApp('yarn.lock'),
-  testsSetup: resolveApp('src/setupTests.js'),
+  testsSetup: resolveSetupTests(),
   appNodeModules: resolveApp('node_modules'),
   // this is empty with npm3 but node resolution searches higher anyway:
   ownNodeModules: resolveOwn('../node_modules'),
   nodePaths: nodePaths,
   publicUrl: getPublicUrl(resolveApp('package.json')),
-  servedPath: getServedPath(resolveApp('package.json'))
+  servedPath: getServedPath(resolveApp('package.json')),
+  appTsconfigJson: resolveApp('tsconfig.json')
 };
 
 // config before publish: we're in ./packages/react-scripts/config/
@@ -118,16 +168,17 @@ if (__dirname.indexOf(path.join('packages', 'react-scripts', 'config')) !== -1) 
     appBuild: resolveOwn('../../../build'),
     appPublic: resolveOwn('../template/public'),
     appHtml: resolveOwn('../template/public/index.html'),
-    appIndexJs: resolveOwn('../template/src/index.js'),
+    appIndexJs: resolveOwnAppIndex(),
     appPackageJson: resolveOwn('../package.json'),
     appSrc: resolveOwn('../template/src'),
     yarnLockFile: resolveOwn('../template/yarn.lock'),
-    testsSetup: resolveOwn('../template/src/setupTests.js'),
+    testsSetup: resolveOwnSetupTests(),
     appNodeModules: resolveOwn('../node_modules'),
     ownNodeModules: resolveOwn('../node_modules'),
     nodePaths: nodePaths,
     publicUrl: getPublicUrl(resolveOwn('../package.json')),
-    servedPath: getServedPath(resolveOwn('../package.json'))
+    servedPath: getServedPath(resolveOwn('../package.json')),
+    appTsconfigJson: resolveOwn('../template/tsconfig.json')
   };
 }
 // @remove-on-eject-end

@@ -125,6 +125,14 @@ function printErrors(summary, errors) {
   console.log(chalk.red(summary));
   console.log();
   errors.forEach(err => {
+    if (err.loaderSource === 'ts-loader') {
+      if (err.file) {
+        console.log('Error in ' + err.file);
+      } else if (err.module) {
+        console.log('Error in ' + err.module.userRequest);
+      }
+    }
+
     console.log(err.message || err);
     console.log();
   });
@@ -144,7 +152,7 @@ function build(previousSizeMap) {
       process.exit(1);
     }
 
-    if (process.env.CI && stats.compilation.warnings.length) {
+    if (process.env.FAIL_ON_WARNING && process.env.CI && stats.compilation.warnings.length) {
      printErrors('Failed to compile. When process.env.CI = true, warnings are treated as failures. Most CI servers set this automatically.', stats.compilation.warnings);
      process.exit(1);
    }

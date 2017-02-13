@@ -1,0 +1,4 @@
+{
+  "extends": "@modsy/react-modsy-scripts/tslint.json"
+}
+
