@@ -20,7 +20,7 @@ Please refer to its documentation:
 * [x] Typescript
 * [x] SASS
 * [x] Multiple Entry Points
-* [x] Automatic Browser Open disabled by default (`CRA_OPEN_BROWSER=true` to reenable)
+* [x] Does not fail on warnings for CI builds - set `FAIL_ON_WARNING=true` to reenable
 
 JS/ES6 support has been kept in, so you can use JS/ES6 and Typescript in the same project if you need to.
 
