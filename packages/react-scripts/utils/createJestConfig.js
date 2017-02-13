@@ -29,7 +29,7 @@ module.exports = (resolve, rootDir, isEjecting) => {
     testEnvironment: 'node',
     testURL: 'http://localhost',
     transform: {
-      '^.+\\.(ts|tsx)$': resolve('config/jest/typescriptTransform.js'),
+      '^.+\\.(ts|tsx)$': '<rootDir>/node_modules/ts-jest/preprocessor.js',
       '^.+\\.(js|jsx)$': isEjecting ?
         '<rootDir>/node_modules/babel-jest'
         : resolve('config/jest/babelTransform.js'),
