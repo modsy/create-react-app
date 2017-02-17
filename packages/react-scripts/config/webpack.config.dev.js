@@ -242,7 +242,7 @@ module.exports = {
               }
             }
           },
-          'resolve-url', {
+          'resolve-url-loader', {
             loader: 'sass-loader',
             options: {
               sourceMap: true
