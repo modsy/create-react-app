@@ -60,7 +60,8 @@
   },
   "devDependencies": {
     "react": "^15.5.4",
-    "react-dom": "^15.5.4"
+    "react-dom": "^15.5.4",
+    "webpack-bundle-tracker": "^0.2.0"
   },
   "optionalDependencies": {
     "fsevents": "1.1.2"
