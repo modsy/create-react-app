@@ -111,6 +111,7 @@ module.exports = {
   },
   // @remove-on-eject-end
   module: {
+    noParse: /emlapack/,
     rules: [
       // First, run the linter.
       // It's important to do this before Babel processes the JS.
@@ -257,7 +258,7 @@ module.exports = {
         options: {
           name: 'static/media/[name].[hash:8].[ext]'
         }
-      }
+      },
       // ** STOP ** Are you adding a new loader?
       // Remember to add the new extension(s) to the "url" loader exclusion list.
     ]
@@ -307,7 +308,5 @@ module.exports = {
   // cumbersome.
   performance: {
     hints: false
-  },
-
-  noParse: /emlapack/
+  }
 };

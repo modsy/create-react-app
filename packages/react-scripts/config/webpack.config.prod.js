@@ -119,6 +119,7 @@ module.exports = {
   },
   // @remove-on-eject-end
   module: {
+    noParse: /emlapack/,
     rules: [
       // First, run the linter.
       // It's important to do this before Babel processes the JS.
@@ -341,7 +342,5 @@ module.exports = {
     fs: 'empty',
     net: 'empty',
     tls: 'empty'
-  },
-
-  noParse: /emlapack/
+  }
 };
