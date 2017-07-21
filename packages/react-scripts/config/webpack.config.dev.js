@@ -307,5 +307,7 @@ module.exports = {
   // cumbersome.
   performance: {
     hints: false
-  }
+  },
+
+  noParse: /emlapack/
 };
