@@ -20,7 +20,7 @@ var paths = require('./paths');
 var getClientEnvironment = require('./env');
 var webpackConfigHelper = require('./webpackConfigHelper');
 
-var srcPaths = [paths.appSrc, 'node_modules/modsy-web-core/**'];
+var appPaths = paths.appSrc.concat(['node_modules/modsy-web-core/**']);
 
 // @remove-on-eject-begin
 // `path` is not used after eject - see https://github.com/facebookincubator/create-react-app/issues/1174
@@ -140,12 +140,12 @@ module.exports = {
           // @remove-on-eject-end
           loader: 'eslint-loader'
         }],
-        include: srcPaths
+        include: appPaths
       },
       {
         test: /\.(ts|tsx)$/,
         loader: 'tslint-loader',
-        include: srcPaths
+        include: appPaths
       },
       // ** ADDING/UPDATING LOADERS **
       // The "url" loader handles all assets unless explicitly excluded.
@@ -174,13 +174,13 @@ module.exports = {
       // Process TS with Typescript.
       {
         test: /\.(ts|tsx)$/,
-        include: srcPaths,
+        include: appPaths,
         loader: 'ts-loader'
       },
       // Process JS with Babel.
       {
         test: /\.(js|jsx)$/,
-        include: srcPaths,
+        include: appPaths,
         loader: 'babel-loader',
         // @remove-on-eject-begin
         options: {
@@ -289,7 +289,7 @@ module.exports = {
     // https://github.com/bholloway/resolve-url-loader/issues/33#issuecomment-249830601
     new webpack.LoaderOptionsPlugin({
       options: {
-        context: srcPaths,
+        context: appPaths,
         output: {
           path: paths.appBuild
         }
